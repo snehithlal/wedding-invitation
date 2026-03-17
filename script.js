@@ -140,6 +140,12 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
 
     // 3. Couple section (single section, both profiles)
+    const renderTextWithBreaks = (text) =>
+        String(text ?? '')
+            .split('\n')
+            .map((line) => escapeAttr(line))
+            .join('<br>');
+
     const renderPersonCard = (person) => `
         <div class="w-full flex flex-col items-center">
             <div class="rotated-borders-container z-10">
@@ -153,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="text-center mt-10 px-2 z-10 w-full">
                 <h3 class="font-script text-6xl text-wedding-green mb-3">${person.name}</h3>
                 <p class="text-wedding-pink text-base font-medium leading-relaxed max-w-[320px] mx-auto text-center">
-                    ${person.details}
+                    ${renderTextWithBreaks(person.details)}
                 </p>
             </div>
         </div>
@@ -198,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="text-center mb-7">
                         <div class="text-[11px] tracking-[0.32em] uppercase text-gray-600/80 font-semibold mb-3">${event.title}</div>
                         <h3 class="font-serif font-bold text-3xl text-wedding-green tracking-widest uppercase">${event.name}</h3>
-                        <p class="mt-3 text-gray-600">${event.subtitle}</p>
+                        <p class="mt-3 text-gray-600">${renderTextWithBreaks(event.subtitle)}</p>
                     </div>
 
                     <div class="rounded-[22px] overflow-hidden border border-black/10 shadow-lg shadow-black/10 bg-white">
