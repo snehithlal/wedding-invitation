@@ -18,10 +18,11 @@
         extend: {
           colors: {
             wedding: {
-              green: '#3A6B35', // Match the dark green from the screenshot
-              box: '#5c8551',
-              pink: '#D3727A',  // Match the pink text
-              bg: '#FFFFFF',
+              red: '#8B1538',
+              rose: '#C77B8F',
+              blush: '#F3D2DB',
+              gold: '#D4AF37',
+              bg: '#FFF6F8',
               darktext: '#1F2937'
             }
           },
@@ -37,8 +38,8 @@
   <style>
     /* Base + theme */
     :root {
-        --bg: #f5f6f8;
-        --surface: #ffffff;
+        --bg: #121216;
+        --surface: #FBF4EE;
         --text: #111827;
         --muted: #6b7280;
         --ring: rgba(17, 24, 39, 0.12);
@@ -49,21 +50,70 @@
 
     body {
         background:
-            radial-gradient(1100px 500px at 20% 0%, rgba(211,114,122,0.12), transparent 55%),
-            radial-gradient(900px 500px at 85% 20%, rgba(58,107,53,0.12), transparent 50%),
+            radial-gradient(1200px 640px at 18% 0%, rgba(199,123,143,0.22), transparent 58%),
+            radial-gradient(1000px 680px at 92% 16%, rgba(212,175,55,0.18), transparent 60%),
+            radial-gradient(920px 560px at 50% 92%, rgba(139,21,56,0.18), transparent 58%),
+            radial-gradient(1200px 900px at 50% 50%, rgba(255,255,255,0.06), transparent 65%),
             var(--bg);
     }
 
     .app-container {
         max-width: 480px;
         margin: 20px auto;
-        background-color: var(--surface);
+        background: var(--surface);
         min-height: calc(100vh - 40px);
         position: relative;
         border-radius: var(--radius-xl);
-        box-shadow: var(--shadow);
+        box-shadow: 0 26px 70px rgba(0, 0, 0, 0.38);
         overflow: hidden;
-        border: 1px solid rgba(17, 24, 39, 0.06);
+        border: 1px solid rgba(212, 175, 55, 0.22);
+        animation: premiumShift 16s ease-in-out infinite;
+    }
+
+    /* Premium background overlay (ivory marble + rose-gold foil) */
+    .app-container::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.98;
+        background:
+            radial-gradient(900px 560px at 50% 0%, rgba(255,255,255,0.86), rgba(255,255,255,0) 62%),
+            radial-gradient(720px 520px at 10% 22%, rgba(199,123,143,0.14), transparent 62%),
+            radial-gradient(720px 520px at 90% 28%, rgba(212,175,55,0.12), transparent 62%),
+            radial-gradient(700px 540px at 50% 94%, rgba(139,21,56,0.08), transparent 66%),
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='920' viewBox='0 0 520 920'%3E%3Cpath d='M-60 170 C 120 60, 180 280, 340 170 S 540 250, 700 150' fill='none' stroke='rgba(70,60,50,0.10)' stroke-width='3.0' stroke-linecap='round'/%3E%3Cpath d='M-40 140 C 120 40, 160 240, 320 140 S 520 220, 620 120' fill='none' stroke='rgba(210,190,160,0.55)' stroke-width='2.2' stroke-linecap='round'/%3E%3Cpath d='M-80 540 C 140 400, 230 700, 440 560 S 640 680, 760 520' fill='none' stroke='rgba(199,123,143,0.24)' stroke-width='1.8' stroke-linecap='round'/%3E%3Cpath d='M-40 790 C 100 710, 190 860, 330 800 S 500 850, 620 780' fill='none' stroke='rgba(212,175,55,0.22)' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
+        background-size:
+            auto,
+            auto,
+            auto,
+            auto,
+            520px 920px;
+        background-position:
+            0 0,
+            0 0,
+            0 0,
+            0 0,
+            center;
+        background-repeat:
+            no-repeat,
+            no-repeat,
+            no-repeat,
+            no-repeat,
+            no-repeat;
+        mix-blend-mode: normal;
+    }
+
+    /* Make sure real content stays above overlay */
+    .app-container > * {
+        position: relative;
+        z-index: 2;
+    }
+
+    @keyframes premiumShift {
+        0%, 100% { background-position: 0% 0%, 0% 0%, 0% 0%; }
+        50% { background-position: 0% 0%, 100% 100%, 0% 0%; }
     }
 
     @media (max-width: 520px) {
@@ -72,6 +122,22 @@
             min-height: 100vh;
             border-radius: 0;
             border: 0;
+            /* mobile: smoother, cleaner premium surface */
+            animation: none;
+        }
+
+        /* mobile: remove heavy decorative overlay that can look like clouds/hearts */
+        .app-container::before {
+            opacity: 0.92;
+            background:
+                radial-gradient(920px 560px at 50% 0%, rgba(255,255,255,0.92), rgba(255,255,255,0) 62%),
+                radial-gradient(760px 520px at 10% 22%, rgba(199,123,143,0.12), transparent 62%),
+                radial-gradient(760px 520px at 90% 28%, rgba(212,175,55,0.11), transparent 62%),
+                radial-gradient(740px 560px at 50% 96%, rgba(139,21,56,0.07), transparent 66%),
+                linear-gradient(135deg, rgba(255,255,255,0.25), rgba(255,255,255,0) 55%);
+            background-size: auto;
+            background-position: 0 0;
+            background-repeat: no-repeat;
         }
     }
 
@@ -93,20 +159,69 @@
         transform: translate3d(0,0,0);
         animation: blobFloat 12s ease-in-out infinite;
     }
-    .blob.blob-1 { background: #D3727A; top: -120px; left: -140px; }
-    .blob.blob-2 { background: #3A6B35; top: 120px; right: -180px; animation-delay: -3s; }
-    .blob.blob-3 { background: #d2b48c; bottom: -160px; left: 40px; animation-delay: -6s; }
+    .blob.blob-1 { background: #C77B8F; top: -120px; left: -140px; }
+    .blob.blob-2 { background: #8B1538; top: 120px; right: -180px; animation-delay: -3s; }
+    .blob.blob-3 { background: #D4AF37; bottom: -160px; left: 40px; animation-delay: -6s; }
 
     @keyframes blobFloat {
         0%, 100% { transform: translate3d(0,0,0) scale(1); }
         50% { transform: translate3d(20px, -14px, 0) scale(1.08); }
     }
-    
+
+    /* Rose-themed subtle corner marks */
+    .corner-ornament {
+        position: absolute;
+        width: 120px;
+        opacity: 0.16;
+        filter: saturate(1.1);
+        pointer-events: none;
+        z-index: 1;
+    }
+    .corner-ornament.tl { top: -10px; left: -10px; --rot: -8deg; transform: rotate(-8deg); animation: ornamentFloat 7s ease-in-out infinite; }
+    .corner-ornament.br { bottom: -14px; right: -14px; --rot: 172deg; transform: rotate(172deg); animation: ornamentFloat 7s ease-in-out infinite; animation-delay: -2.6s; }
+
+    @keyframes ornamentFloat {
+        0%, 100% { transform: translate3d(0,0,0) rotate(var(--rot, 0deg)); opacity: 0.14; }
+        50% { transform: translate3d(0,-10px,0) rotate(var(--rot, 0deg)); opacity: 0.20; }
+    }
+
+    /* Premium staggered hero reveals */
+    .fade-up {
+        opacity: 0;
+        transform: translateY(14px);
+        animation: fadeUp 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .fade-up.d1 { animation-delay: 0.05s; }
+    .fade-up.d2 { animation-delay: 0.18s; }
+    .fade-up.d3 { animation-delay: 0.32s; }
+    .fade-up.d4 { animation-delay: 0.46s; }
+    .fade-up.d5 { animation-delay: 0.60s; }
+    @keyframes fadeUp {
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Scroll reveal for elements inside sections */
+    .reveal {
+        opacity: 0;
+        transform: translateY(18px);
+        filter: blur(8px);
+        transition:
+            opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+            transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+            filter 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        will-change: transform, opacity, filter;
+    }
+    .reveal.in {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+
     /* Arch image style */
     .arch-image-wrapper {
         position: relative;
         padding: 8px;
-        border: 1.5px solid #222;
+        border: 1.5px solid rgba(17,24,39,0.70);
         border-radius: 9rem 9rem 0 0;
         margin: 0 auto;
         width: 80%;
@@ -132,7 +247,7 @@
     .rotated-border-1, .rotated-border-2 {
         position: absolute;
         inset: -12px;
-        border: 1px solid #d2b48c;
+        border: 1px solid rgba(212,175,55,0.75);
     }
     .rotated-border-1 { transform: rotate(4deg); inset: -8px;}
     .rotated-border-2 { transform: rotate(-4deg); inset: -14px;}
@@ -142,11 +257,25 @@
         inset: 0;
         z-index: 10;
         overflow: hidden;
+        border-radius: 18px;
     }
     .photo-inner img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+    }
+
+    /* Soft interactive lift */
+    .lift {
+        transition: transform 0.22s ease, box-shadow 0.22s ease;
+        will-change: transform;
+    }
+    .lift:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-soft);
+    }
+    .lift:active {
+        transform: translateY(0px) scale(0.99);
     }
     
     /* Global Fixed Map Button */
@@ -176,7 +305,19 @@
     @media (max-width: 480px) {
         #global-map-btn {
             right: 20px;
+            bottom: 18px;
+            width: 54px;
+            height: 54px;
         }
+        /* scale down ornaments/watermarks for mobile */
+        .corner-ornament { width: 92px; opacity: 0.14; }
+        .watermark-top, .watermark-bottom { width: 160px; opacity: 0.12; }
+        .blob { width: 280px; height: 280px; opacity: 0.14; }
+    }
+
+    /* Extra-short screens: hide scroll cue to avoid overlap */
+    @media (max-height: 720px) {
+        .scroll-cue { display: none; }
     }
     
     /* Watermark decoration */
@@ -247,7 +388,7 @@
         width: 3.5px;
         height: 6px;
         border-radius: 999px;
-        background: rgba(58, 107, 53, 0.75);
+        background: rgba(139, 21, 56, 0.75);
         position: absolute;
         left: 50%;
         top: 7px;
@@ -270,7 +411,7 @@
 <body class="font-sans antialiased text-gray-800">
   <!-- Global Fixed Map Button — always visible while scrolling -->
   <a id="global-map-btn" href="#" target="_blank" aria-label="Open in Google Maps">
-    <svg viewBox="0 0 24 24" style="width:28px;height:28px;color:#3A6B35" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <svg viewBox="0 0 24 24" style="width:28px;height:28px;color:#8B1538" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
       <circle cx="12" cy="10" r="3"></circle>
     </svg>
