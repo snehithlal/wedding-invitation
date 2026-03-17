@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Snehithlal & Krishnapriya - Wedding Invitation</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            wedding: {
+              green: '#3A6B35', // Match the dark green from the screenshot
+              box: '#5c8551',
+              pink: '#D3727A',  // Match the pink text
+              bg: '#FFFFFF',
+              darktext: '#1F2937'
+            }
+          },
+          fontFamily: {
+            script: ['"Great Vibes"', 'cursive'],
+            serif: ['"Playfair Display"', 'serif'],
+            sans: ['"Poppins"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom utility classes */
+    body {
+        background-color: #f0f2f5; /* Light gray for outside the app container */
+    }
+    .app-container {
+        max-width: 480px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        min-height: 100vh;
+        position: relative;
+        box-shadow: 0 0 25px rgba(0,0,0,0.1);
+        overflow-x: hidden;
+    }
+    
+    /* Arch image style */
+    .arch-image-wrapper {
+        position: relative;
+        padding: 8px;
+        border: 1.5px solid #222;
+        border-radius: 9rem 9rem 0 0;
+        margin: 0 auto;
+        width: 80%;
+        max-width: 320px;
+        background: #fff;
+    }
+    .arch-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        aspect-ratio: 3/4;
+        border-radius: 8.5rem 8.5rem 0 0;
+    }
+    
+    /* Double rotated border for 'About Us' photos */
+    .rotated-borders-container {
+        position: relative;
+        width: 75%;
+        max-width: 280px;
+        margin: 40px auto;
+        aspect-ratio: 1/1;
+    }
+    .rotated-border-1, .rotated-border-2 {
+        position: absolute;
+        inset: -12px;
+        border: 1px solid #d2b48c;
+    }
+    .rotated-border-1 { transform: rotate(4deg); inset: -8px;}
+    .rotated-border-2 { transform: rotate(-4deg); inset: -14px;}
+    
+    .photo-inner {
+        position: absolute;
+        inset: 0;
+        z-index: 10;
+        overflow: hidden;
+    }
+    .photo-inner img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    /* Global Fixed Map Button */
+    #global-map-btn {
+        position: fixed;
+        bottom: 28px;
+        right: calc(50% - 240px + 20px); /* right edge of the app container */
+        width: 60px;
+        height: 60px;
+        background-color: white;
+        border-radius: 50%;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+        border: 1px solid #e5e7eb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2147483647;
+        transition: box-shadow 0.2s, transform 0.2s;
+        text-decoration: none;
+    }
+    #global-map-btn:hover, #global-map-btn:active {
+        box-shadow: 0 8px 30px rgba(0,0,0,0.22);
+        transform: scale(1.08);
+    }
+
+    /* On small screens, right edge of app = right edge of screen */
+    @media (max-width: 480px) {
+        #global-map-btn {
+            right: 20px;
+        }
+    }
+    
+    /* Watermark decoration */
+    .watermark {
+        position: absolute;
+        opacity: 0.15;
+        z-index: 0;
+        pointer-events: none;
+    }
+    .watermark-top {
+        top: 0;
+        left: 0;
+        width: 200px;
+        transform: translate(-30%, -30%);
+    }
+    .watermark-bottom {
+        bottom: 0;
+        right: 0;
+        width: 200px;
+        transform: translate(30%, 30%) rotate(180deg);
+    }
+    
+    /* Section entrance animation */
+    .section-animate {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .section-animate.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Hide scrollbar for cleaner app look */
+    ::-webkit-scrollbar {
+        width: 0px;
+        background: transparent;
+    }
+  </style>
+</head>
+<body class="font-sans antialiased text-gray-800">
+  <!-- Global Fixed Map Button — always visible while scrolling -->
+  <a id="global-map-btn" href="#" target="_blank" aria-label="Open in Google Maps">
+    <svg viewBox="0 0 24 24" style="width:28px;height:28px;color:#3A6B35" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+      <circle cx="12" cy="10" r="3"></circle>
+    </svg>
+  </a>
+
+  <div class="app-container" id="app">
+    <!-- Content will be injected by script.js using data.js -->
+  </div>
+  
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
