@@ -1,43 +1,50 @@
 const WEDDING_DATA = {
-    // Main couple details
-    bride: {
-        name: "Krishnapriya",
-        photo: "images/bride.jpg", // Replace with actual path in your images folder
-        details: "Kindly share the bride's details, including her parents' names and address."
+  // Main couple details
+  bride: {
+    name: "Krishnapriya",
+    photo: "images/bride.jpg", // Replace with actual path in your images folder
+    details:
+      "D/o. Mr. Divakaran & Mrs. Rema\nIkkaramukkhil House, Nenmenikunnu PO,\nSulthan Bathery, Wayanad",
+  },
+  groom: {
+    name: "Snehith Lal",
+    photo: "images/groom.jpg", // Replace with actual path in your images folder
+    details:
+      "S/o. Mr. Suresh Lal & Mrs. Shyla\nPonnarassery House, Thazhathoor PO,\nSulthan Bathery, Wayanad",
+  },
+
+  // Arch photo (Hero section)
+  couplePhoto: "images/couple.jpg", // Replace with actual couple photo
+
+  // Google Maps link for the venue button floating at bottom right
+  venueMapUrl: "https://maps.app.goo.gl/1TWeM593fWJEJYEp7",
+
+  // Date Information
+  weddingDateDisplay: "SUNDAY, 10TH MAY 2026",
+  weddingDate: "2026-05-10T10:00:00", // ISO format for countdown timer (start time)
+
+  // Events
+  events: [
+    {
+      title: "WEDDING",
+      photo: "images/wedding-event.jpg", // Replace with event photo
+      subtitle:
+        "At Alma Convention Center, Nambikolli\nBetween 10:00 AM & 12:00 PM",
+      name: "Wedding Ceremony",
+      mapUrl: "https://maps.app.goo.gl/1TWeM593fWJEJYEp7",
     },
-    groom: {
-        name: "Snehithlal",
-        photo: "images/groom.jpg", // Replace with actual path in your images folder
-        details: "Kindly share the groom's details, including his parents' names and address."
-    },
+  ],
 
-    // Arch photo (Hero section)
-    couplePhoto: "images/couple.jpg", // Replace with actual couple photo
+  contactPhone: "9495783164",
+  sharingTheHappiness:
+    "Sangeeth Lal, Sheeja, Sallap, Souhridh, Sudheer & Family",
 
-    // Google Maps link for the venue button floating at bottom right
-    venueMapUrl: "https://maps.app.goo.gl/1TWeM593fWJEJYEp7",
-
-    // Date Information
-    weddingDateDisplay: "10/05/2026",
-    weddingDate: "2026-05-10T10:00:00", // ISO format for countdown timer
-
-    // Events
-    events: [
-        {
-            title: "WEDDING EVENTS",
-            photo: "images/wedding-event.jpg", // Replace with event photo
-            subtitle: "It's party time! Come celebrate",
-            name: "Wedding",
-            mapUrl: "https://maps.app.goo.gl/1TWeM593fWJEJYEp7"
-        }
-    ],
-
-    // Gallery Photos
-    // Add paths to your photos here to display them in the gallery section
-    gallery: [
-        "images/gallery1.jpg",
-        "images/gallery2.jpg",
-        "images/gallery3.jpg",
-        "images/gallery4.jpg"
-    ]
+  // Gallery Photos
+  // Add paths to your photos here to display them in the gallery section
+  gallery: [
+    "images/gallery1.jpg",
+    "images/gallery2.jpg",
+    "images/gallery3.jpg",
+    "images/gallery4.jpg",
+  ],
 };

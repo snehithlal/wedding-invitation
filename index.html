@@ -35,18 +35,71 @@
     }
   </script>
   <style>
-    /* Custom utility classes */
-    body {
-        background-color: #f0f2f5; /* Light gray for outside the app container */
+    /* Base + theme */
+    :root {
+        --bg: #f5f6f8;
+        --surface: #ffffff;
+        --text: #111827;
+        --muted: #6b7280;
+        --ring: rgba(17, 24, 39, 0.12);
+        --shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+        --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.10);
+        --radius-xl: 28px;
     }
+
+    body {
+        background:
+            radial-gradient(1100px 500px at 20% 0%, rgba(211,114,122,0.12), transparent 55%),
+            radial-gradient(900px 500px at 85% 20%, rgba(58,107,53,0.12), transparent 50%),
+            var(--bg);
+    }
+
     .app-container {
         max-width: 480px;
-        margin: 0 auto;
-        background-color: #ffffff;
-        min-height: 100vh;
+        margin: 20px auto;
+        background-color: var(--surface);
+        min-height: calc(100vh - 40px);
         position: relative;
-        box-shadow: 0 0 25px rgba(0,0,0,0.1);
-        overflow-x: hidden;
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        border: 1px solid rgba(17, 24, 39, 0.06);
+    }
+
+    @media (max-width: 520px) {
+        .app-container {
+            margin: 0 auto;
+            min-height: 100vh;
+            border-radius: 0;
+            border: 0;
+        }
+    }
+
+    /* Subtle animated background blobs */
+    .bg-blobs {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+    }
+    .blob {
+        position: absolute;
+        width: 340px;
+        height: 340px;
+        border-radius: 999px;
+        filter: blur(28px);
+        opacity: 0.18;
+        transform: translate3d(0,0,0);
+        animation: blobFloat 12s ease-in-out infinite;
+    }
+    .blob.blob-1 { background: #D3727A; top: -120px; left: -140px; }
+    .blob.blob-2 { background: #3A6B35; top: 120px; right: -180px; animation-delay: -3s; }
+    .blob.blob-3 { background: #d2b48c; bottom: -160px; left: 40px; animation-delay: -6s; }
+
+    @keyframes blobFloat {
+        0%, 100% { transform: translate3d(0,0,0) scale(1); }
+        50% { transform: translate3d(20px, -14px, 0) scale(1.08); }
     }
     
     /* Arch image style */
@@ -110,7 +163,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        z-index: 2147483647;
+        z-index: 5000;
         transition: box-shadow 0.2s, transform 0.2s;
         text-decoration: none;
     }
@@ -149,12 +202,62 @@
     /* Section entrance animation */
     .section-animate {
         opacity: 0;
-        transform: translateY(40px);
-        transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        transform: translateY(22px);
+        filter: blur(6px);
+        transition:
+            opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+            transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+            filter 0.75s cubic-bezier(0.22, 1, 0.36, 1);
     }
     .section-animate.visible {
         opacity: 1;
         transform: translateY(0);
+        filter: blur(0px);
+    }
+
+    /* Scroll cue */
+    .scroll-cue {
+        position: absolute;
+        bottom: 26px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        z-index: 20;
+        color: rgba(31, 41, 55, 0.78);
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        font-size: 10px;
+        user-select: none;
+        pointer-events: none;
+    }
+    .scroll-cue .mouse {
+        width: 22px;
+        height: 34px;
+        border: 1.5px solid rgba(31, 41, 55, 0.35);
+        border-radius: 999px;
+        position: relative;
+        background: rgba(255, 255, 255, 0.45);
+        backdrop-filter: blur(6px);
+    }
+    .scroll-cue .mouse::after {
+        content: '';
+        width: 3.5px;
+        height: 6px;
+        border-radius: 999px;
+        background: rgba(58, 107, 53, 0.75);
+        position: absolute;
+        left: 50%;
+        top: 7px;
+        transform: translateX(-50%);
+        animation: wheel 1.35s ease-in-out infinite;
+    }
+    @keyframes wheel {
+        0%, 100% { opacity: 0.2; transform: translateX(-50%) translateY(0); }
+        40% { opacity: 0.85; }
+        70% { opacity: 0.2; transform: translateX(-50%) translateY(10px); }
     }
 
     /* Hide scrollbar for cleaner app look */
