@@ -224,8 +224,8 @@
         border: 1.5px solid rgba(17,24,39,0.70);
         border-radius: 9rem 9rem 0 0;
         margin: 0 auto;
-        width: 80%;
-        max-width: 320px;
+        width: 72%;
+        max-width: 280px;
         background: #fff;
     }
     .arch-image {
@@ -233,6 +233,7 @@
         height: 100%;
         object-fit: cover;
         aspect-ratio: 3/4;
+        max-height: 340px;
         border-radius: 8.5rem 8.5rem 0 0;
     }
     
@@ -405,6 +406,118 @@
     ::-webkit-scrollbar {
         width: 0px;
         background: transparent;
+    }
+
+    /* ── Cover Screen ─────────────────────────────────────────────────────── */
+    .cover-screen {
+        background:
+            radial-gradient(900px 560px at 50% 0%, rgba(255,255,255,0.86), rgba(255,255,255,0) 62%),
+            radial-gradient(720px 520px at 10% 22%, rgba(199,123,143,0.18), transparent 62%),
+            radial-gradient(720px 520px at 90% 28%, rgba(212,175,55,0.14), transparent 62%),
+            radial-gradient(700px 540px at 50% 94%, rgba(139,21,56,0.12), transparent 66%),
+            #FBF4EE;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .cover-blobs {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+    }
+    .cover-blob {
+        position: absolute;
+        border-radius: 999px;
+        filter: blur(40px);
+        opacity: 0.22;
+    }
+    .cb-1 { width: 300px; height: 300px; background: #C77B8F; top: -100px; left: -120px; animation: blobFloat 10s ease-in-out infinite; opacity: 0.15; }
+    .cb-2 { width: 260px; height: 260px; background: #8B1538; bottom: -80px; right: -100px; animation: blobFloat 13s ease-in-out infinite; animation-delay: -4s; opacity: 0.12; }
+    .cb-3 { width: 200px; height: 200px; background: #D4AF37; top: 55%; left: -60px; animation: blobFloat 9s ease-in-out infinite; animation-delay: -7s; opacity: 0.14; }
+
+    .cover-tagline {
+        font-family: 'Great Vibes', cursive;
+        font-size: clamp(1.5rem, 5vw, 2rem);
+        color: #5a1a2e;
+        text-align: center;
+        margin-bottom: 2rem;
+        opacity: 0.85;
+        animation: fadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+    }
+
+    .cover-photo-ring {
+        width: clamp(180px, 52vw, 240px);
+        height: clamp(180px, 52vw, 240px);
+        border-radius: 50%;
+        border: 3px solid rgba(255, 255, 255, 0.75);
+        box-shadow:
+            0 0 0 6px rgba(199, 123, 143, 0.22),
+            0 16px 50px rgba(139, 21, 56, 0.14),
+            inset 0 0 0 2px rgba(255,255,255,0.20);
+        overflow: hidden;
+        margin-bottom: 1.75rem;
+        animation: fadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.22s both;
+        flex-shrink: 0;
+    }
+
+    .cover-photo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+    }
+
+    .cover-names {
+        font-family: 'Great Vibes', cursive;
+        font-size: clamp(2.2rem, 9vw, 3rem);
+        color: #5a1a2e;
+        text-align: center;
+        margin-bottom: 2rem;
+        animation: fadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.36s both;
+        line-height: 1.1;
+    }
+
+    .open-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 32px;
+        background: rgba(255, 255, 255, 0.82);
+        border: 1.5px solid rgba(139, 21, 56, 0.18);
+        border-radius: 999px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 15px;
+        font-weight: 600;
+        color: #5a1a2e;
+        cursor: pointer;
+        box-shadow:
+            0 4px 20px rgba(139, 21, 56, 0.14),
+            0 1px 4px rgba(0,0,0,0.06);
+        transition: background 0.2s, transform 0.18s, box-shadow 0.2s;
+        animation: fadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.52s both;
+        letter-spacing: 0.01em;
+        backdrop-filter: blur(8px);
+    }
+    .open-btn:hover {
+        background: rgba(255, 255, 255, 0.98);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 28px rgba(139, 21, 56, 0.20), 0 1px 4px rgba(0,0,0,0.07);
+    }
+    .open-btn:active {
+        transform: translateY(0) scale(0.98);
+    }
+
+    /* ── Invitation content toggle ────────────────────────────────────────── */
+    .invitation-content-hidden {
+        display: none;
+    }
+    .invitation-content-visible {
+        display: block;
+        animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
   </style>
 </head>
