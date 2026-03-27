@@ -3,12 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Snehithlal & Krishnapriya - Wedding Invitation</title>
+  <title>Snehith & Krishnapriya - Wedding Invitation</title>
   
-  <!-- Fonts -->
+  <!-- SEO & Open Graph / WhatsApp Sharing -->
+  <meta name="title" content="Snehith & Krishnapriya | Wedding Invitation">
+  <meta name="description" content="We joyfully invite you to celebrate our wedding on Sunday, 10th May 2026. Join us for a day of love and celebration!">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://snehithlal.github.io/wedding-invitation/">
+  <meta property="og:title" content="Snehith & Krishnapriya | Wedding Invitation 💜">
+  <meta property="og:description" content="Tap to open our digital invitation! We can't wait to celebrate with you on Sunday, 10th May 2026.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <!-- Fonts (2 Max for Premium Typography) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -28,8 +38,8 @@
           },
           fontFamily: {
             script: ['"Great Vibes"', 'cursive'],
-            serif: ['"Playfair Display"', 'serif'],
-            sans: ['"Poppins"', 'sans-serif'],
+            sans: ['"Montserrat"', 'sans-serif'],
+            serif: ['"Montserrat"', 'sans-serif'], /* mapped safely to override old classes */
           }
         }
       }
@@ -220,7 +230,7 @@
 
     /* ── Cover text ── */
     .env-top-label {
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         font-size: 10px; letter-spacing: .32em; text-transform: uppercase;
         color: rgba(61,26,110,0.6); font-weight: 600;
         margin-bottom: 16px;
@@ -234,7 +244,7 @@
         animation: fadeUp 1s ease .25s both;
     }
     .env-date {
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         font-size: 11px; letter-spacing: .22em; text-transform: uppercase;
         color: rgba(61,26,110,0.55); font-weight: 500;
         margin-top: 20px;
@@ -567,7 +577,7 @@
                 <defs>
                   <path id="sealCircle" d="M 46,46 m -31,0 a 31,31 0 1,1 62,0 a 31,31 0 1,1 -62,0"/>
                 </defs>
-                <text font-family="Poppins, sans-serif" font-size="7.5" font-weight="600" letter-spacing="2" fill="#D4AF37" opacity="0.95">
+                <text font-family="Montserrat, sans-serif" font-size="7.5" font-weight="600" letter-spacing="2" fill="#D4AF37" opacity="0.95">
                   <textPath href="#sealCircle" startOffset="0%">TOUCH TO OPEN · TOUCH TO OPEN · </textPath>
                 </text>
               </svg>

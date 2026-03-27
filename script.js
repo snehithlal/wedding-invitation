@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     <h1 class="fade-up d4 font-script text-5xl sm:text-6xl text-wedding-red tracking-wide leading-tight">${WEDDING_DATA.bride.name}</h1>
 
-                    <div class="fade-up d5 mt-4 text-wedding-rose font-serif font-semibold tracking-[0.18em] sm:tracking-widest text-[11px] sm:text-[12px]">
+                    <div class="fade-up d5 mt-4 text-wedding-rose font-sans font-medium tracking-[0.25em] text-[10px] sm:text-[11px] uppercase">
                         ${WEDDING_DATA.weddingDateDisplay}
                     </div>
 
@@ -166,8 +166,8 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
 
             <div class="text-center mt-10 px-2 z-10 w-full reveal" data-reveal>
-                <h3 class="font-script text-6xl text-wedding-red mb-2">${person.name}</h3>
-                <p class="text-wedding-rose text-base font-medium leading-relaxed max-w-[320px] mx-auto text-center">
+                <h3 class="font-script text-6xl text-wedding-red mb-4">${person.name}</h3>
+                <p class="text-wedding-rose text-[13px] font-normal leading-loose tracking-[0.05em] max-w-[320px] mx-auto text-center">
                     ${renderTextWithBreaks(person.details)}
                 </p>
                 ${person.mapUrl ? `
@@ -249,8 +249,8 @@ document.addEventListener("DOMContentLoaded", () => {
                                 </svg>
                             </span>
                             <div>
-                                <div class="text-[10px] tracking-[0.22em] uppercase text-gray-500 font-semibold mb-0.5">Venue</div>
-                                <div class="text-sm font-semibold text-gray-800 leading-snug">${escapeAttr(venueLine)}</div>
+                                <div class="text-[9px] tracking-[0.35em] uppercase text-gray-500 font-semibold mb-1">Venue</div>
+                                <div class="text-[13px] font-medium text-gray-800 leading-relaxed tracking-[0.02em]">${escapeAttr(venueLine)}</div>
                             </div>
                         </div>` : ""}
 
@@ -263,8 +263,8 @@ document.addEventListener("DOMContentLoaded", () => {
                                 </svg>
                             </span>
                             <div>
-                                <div class="text-[10px] tracking-[0.22em] uppercase text-gray-500 font-semibold mb-0.5">Time</div>
-                                <div class="text-sm font-semibold text-gray-800 leading-snug">${escapeAttr(timeLine)}</div>
+                                <div class="text-[9px] tracking-[0.35em] uppercase text-gray-500 font-semibold mb-1">Time</div>
+                                <div class="text-[13px] font-medium text-gray-800 leading-relaxed tracking-[0.02em]">${timeLine}</div>
                             </div>
                         </div>` : ""}
 
@@ -278,8 +278,8 @@ document.addEventListener("DOMContentLoaded", () => {
                                 </svg>
                             </span>
                             <div>
-                                <div class="text-[10px] tracking-[0.22em] uppercase text-gray-500 font-semibold mb-0.5">Date</div>
-                                <div class="text-sm font-semibold text-gray-800 leading-snug">${WEDDING_DATA.weddingDateDisplay}</div>
+                                <div class="text-[9px] tracking-[0.35em] uppercase text-gray-500 font-semibold mb-1">Date</div>
+                                <div class="text-[13px] font-medium text-gray-800 leading-relaxed tracking-[0.02em]">${WEDDING_DATA.weddingDateDisplay}</div>
                             </div>
                         </div>
                     </div>
