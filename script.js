@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 1. Hero Section
   const renderHero = () => `
-        <section class="section-animate flex flex-col items-center justify-center px-4 sm:px-6 pt-10 pb-10 relative bg-wedding-bg">
+        <section class="section-animate flex flex-col items-center justify-center px-4 sm:px-6 py-12 relative min-h-[100dvh]">
             <div class="bg-blobs" aria-hidden="true">
                 <div class="blob blob-1"></div>
                 <div class="blob blob-2"></div>
@@ -298,7 +298,7 @@ document.addEventListener("DOMContentLoaded", () => {
                            <span class="w-14 h-14 rounded-full bg-white shadow-md border border-[rgba(91,45,142,0.15)] flex items-center justify-center text-[#5B2D8E] group-hover:bg-[#5B2D8E] group-hover:text-white transition-all duration-300">
                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                            </span>
-                           <span class="text-[9px] tracking-[0.2em] uppercase text-[#3d1a6e] font-semibold opacity-80">Add to Cal</span>
+                           <span class="text-[9px] tracking-[0.2em] uppercase text-[#3d1a6e] font-semibold opacity-80 whitespace-nowrap">Add to Calendar</span>
                         </a>
                     </div>
                 </div>

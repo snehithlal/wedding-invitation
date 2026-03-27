@@ -90,7 +90,11 @@
     }
 
     /* ── Bloom blobs ── */
-    .bg-blobs { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+    .bg-blobs { 
+        position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+        mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+    }
     .blob {
         position: absolute; width: 340px; height: 340px;
         border-radius: 999px; filter: blur(28px); opacity: 0.16;
@@ -384,10 +388,12 @@
     #app-inner .text-wedding-gold { color: var(--gold); }
 
     /* Inner page background wash */
+    #app-inner {
+        background: radial-gradient(ellipse 100% 40% at 50% 0%, rgba(216,200,240,0.35) 0%, transparent 80%);
+        min-height: 100vh;
+    }
     #app-inner section {
-        background:
-            radial-gradient(ellipse 80% 40% at 50% 0%, rgba(216,200,240,0.28) 0%, transparent 65%),
-            var(--surface) !important;
+        background: transparent !important;
     }
 
     /* Arch frame border */
