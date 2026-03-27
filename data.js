@@ -5,12 +5,14 @@ const WEDDING_DATA = {
     photo: "images/bride.jpg", // Replace with actual path in your images folder
     details:
       "D/o. Mr. Divakaran & Mrs. Rema\nIkkaramukkhil House, \nNenmenikunnu PO,\nSulthan Bathery, Wayanad",
+    mapUrl: "https://maps.app.goo.gl/x9vqvdP2kUmVLsCq6",
   },
   groom: {
     name: "Snehith Lal",
     photo: "images/groom.jpg", // Replace with actual path in your images folder
     details:
       "S/o. Mr. Suresh Lal & Mrs. Shyla\nPonnarassery House, \nThazhathoor PO,\nSulthan Bathery, Wayanad",
+    mapUrl: "https://maps.app.goo.gl/EfCC2LnxM5kUddfG8",
   },
 
   // Arch photo (Hero section)
