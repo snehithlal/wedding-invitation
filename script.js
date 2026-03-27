@@ -65,35 +65,6 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
     `;
 
-  // 0. Cover / Open Invitation screen
-  const renderCover = () => `
-        <section id="cover-screen" class="cover-screen min-h-screen flex flex-col items-center justify-center px-6 relative overflow-hidden">
-            <div class="cover-blobs" aria-hidden="true">
-                <div class="cover-blob cb-1"></div>
-                <div class="cover-blob cb-2"></div>
-                <div class="cover-blob cb-3"></div>
-            </div>
-
-            <div class="relative z-10 w-full flex flex-col items-center gap-0">
-                <p class="cover-tagline">We are inviting you to our wedding</p>
-
-                <div class="cover-photo-ring">
-                    <img src="${WEDDING_DATA.couplePhoto}" class="cover-photo" alt="Couple Photo"
-                         onerror="this.src='https://images.unsplash.com/photo-1583939003579-730e3918a45a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
-                </div>
-
-                <h1 class="cover-names">${WEDDING_DATA.groom.name} &amp; ${WEDDING_DATA.bride.name}</h1>
-
-                <button id="open-invitation-btn" class="open-btn">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                        <polyline points="22,6 12,13 2,6"/>
-                    </svg>
-                    Open Invitation
-                </button>
-            </div>
-        </section>
-    `;
 
   // 1. Hero Section
   const renderHero = () => `
@@ -332,31 +303,13 @@ document.addEventListener("DOMContentLoaded", () => {
   app.classList.add("pb-10");
 
   app.innerHTML = `
-        ${renderCover()}
-        <div id="invitation-content" class="invitation-content-hidden">
-            ${renderHero()}
-            ${renderCountdown()}
-            ${renderCouple()}
-            ${renderEvents()}
-        </div>
+        ${renderHero()}
+        ${renderCountdown()}
+        ${renderCouple()}
+        ${renderEvents()}
     `;
 
-  // No heavy canvas/particles — keep it clean & fast
 
-  // ── Open Invitation Button ────────────────────────────────────────────
-  const openBtn = document.getElementById("open-invitation-btn");
-  const invitationContent = document.getElementById("invitation-content");
-  const coverScreen = document.getElementById("cover-screen");
-
-  if (openBtn && invitationContent) {
-    openBtn.addEventListener("click", () => {
-      // Instantly hide cover, show invitation at the very top — no scroll
-      coverScreen.style.display = "none";
-      invitationContent.classList.remove("invitation-content-hidden");
-      invitationContent.classList.add("invitation-content-visible");
-      window.scrollTo({ top: 0, behavior: "instant" });
-    });
-  }
 
   // ── Section entrance animations via IntersectionObserver ──────────────
   const sections = app.querySelectorAll(".section-animate");
