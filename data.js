@@ -24,6 +24,7 @@ const WEDDING_DATA = {
   // Date Information
   weddingDateDisplay: "SUNDAY, 10TH MAY 2026",
   weddingDate: "2026-05-10T10:00:00", // ISO format for countdown timer (start time)
+  weddingTimeDisplay: "10:00 AM - 12:00 PM",
 
   // Events
   events: [
