@@ -66,6 +66,17 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
     `;
 
+  const getWeddingTimeDisplay = () => {
+    if (WEDDING_DATA.weddingTimeDisplay) return WEDDING_DATA.weddingTimeDisplay;
+    const weddingDate = new Date(WEDDING_DATA.weddingDate);
+    if (Number.isNaN(weddingDate.getTime())) return "";
+    return weddingDate.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
+  };
+
 
   // 1. Hero Section
   const renderHero = () => `
@@ -94,6 +105,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     <div class="fade-up d5 mt-4 text-wedding-rose font-sans font-medium tracking-[0.25em] text-[10px] sm:text-[11px] uppercase">
                         ${WEDDING_DATA.weddingDateDisplay}
+                    </div>
+
+                    <div class="fade-up d5 mt-2 text-wedding-rose font-sans font-semibold tracking-[0.2em] text-[10px] sm:text-[11px] uppercase opacity-90">
+                      ${getWeddingTimeDisplay()}
                     </div>
 
                     <div class="fade-up d5 mt-5 flex gap-3">
@@ -333,6 +348,10 @@ document.addEventListener("DOMContentLoaded", () => {
   if (envDate) {
     envDate.textContent = WEDDING_DATA.weddingDateDisplay
       .split(',').map(s => s.trim()).join(', ');
+  }
+  const envTime = document.getElementById('env-time-display');
+  if (envTime) {
+    envTime.textContent = getWeddingTimeDisplay();
   }
 
 
