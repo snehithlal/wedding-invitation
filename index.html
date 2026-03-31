@@ -250,6 +250,13 @@
         margin-top: 20px;
         animation: fadeUp 1s ease .55s both;
     }
+    .env-time {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+      color: rgba(61,26,110,0.65); font-weight: 600;
+      margin-top: 8px;
+      animation: fadeUp 1s ease .65s both;
+    }
 
     /* ═══ The Envelope ═══ */
     .envelope-wrap {
@@ -614,8 +621,8 @@
                 <defs>
                   <path id="sealCircle" d="M 52,52 m -46,0 a 46,46 0 1,1 92,0 a 46,46 0 1,1 -92,0"/>
                 </defs>
-                <text font-family="Montserrat, sans-serif" font-size="8.8" font-weight="600" letter-spacing="4.5" fill="#D4AF37" opacity="0.95">
-                  <textPath href="#sealCircle" startOffset="0%">TAP TO VIEW ✧ TAP TO VIEW ✧ </textPath>
+                <text font-family="Montserrat, sans-serif" font-size="6.2" font-weight="600" letter-spacing="1.8" fill="#D4AF37" opacity="0.95">
+                  <textPath href="#sealCircle" startOffset="0%" textLength="289" lengthAdjust="spacingAndGlyphs">TAP TO VIEW INVITATION ✧ TAP TO VIEW INVITATION ✧ </textPath>
                 </text>
               </svg>
               <div class="seal-gold-circle"></div>
@@ -624,8 +631,10 @@
           </div>
         </div>
       </div>
+
       <!-- Date -->
       <div class="env-date" id="env-date-display">Sunday, 10th May 2026</div>
+      <div class="env-time" id="env-time-display">10:00 AM - 12:00 PM</div>
     </div><!-- /envelope-cover -->
 
     <!-- ══ INVITATION CONTENT ══ -->
