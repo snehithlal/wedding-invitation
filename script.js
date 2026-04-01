@@ -117,7 +117,8 @@ document.addEventListener("DOMContentLoaded", () => {
                             title: `${WEDDING_DATA.groom.name} & ${WEDDING_DATA.bride.name} Wedding`,
                             startIso: WEDDING_DATA.weddingDate,
                             durationMinutes: 180,
-                            details: "Wedding Invitation",
+                            location: (WEDDING_DATA.events[0]?.subtitle || '').split('\n')[0].replace(/^At\s*/i, ''),
+                            details: `You are cordially invited to celebrate the wedding of ${WEDDING_DATA.groom.name} & ${WEDDING_DATA.bride.name}.\n\n📍 Venue: ${(WEDDING_DATA.events[0]?.subtitle || '').split('\n')[0].replace(/^At\s*/i, '')}\n🗺️ Directions: ${WEDDING_DATA.venueMapUrl}\n⏰ Time: ${WEDDING_DATA.weddingTimeDisplay}\n\n💌 Digital Invitation: https://snehith-weds-krishnapriya.online`,
                           }),
                         )}" target="_blank"
                            class="px-5 py-3 rounded-full text-white font-semibold shadow-lg shadow-black/10 active:scale-[0.98] transition text-[14px]" style="background:#5B2D8E;">
@@ -222,17 +223,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const renderEvents = () => {
     let eventsHtml = "";
     WEDDING_DATA.events.forEach((event) => {
+      const subtitleLines = (event.subtitle || '').split('\n');
+      const venueLine = subtitleLines[0]?.replace(/^At\s*/i, '') || '';
+      const timeLine  = subtitleLines[1] || '';
       const eventCalLink = buildGoogleCalendarLink({
         title: `${event.name || "Wedding"} — ${WEDDING_DATA.groom.name} & ${WEDDING_DATA.bride.name}`,
         startIso: WEDDING_DATA.weddingDate,
         durationMinutes: 180,
-        details: event.subtitle || "Wedding Invitation",
+        location: venueLine,
+        details: `You are cordially invited to celebrate the wedding of ${WEDDING_DATA.groom.name} & ${WEDDING_DATA.bride.name}.\n\n📍 Venue: ${venueLine}\n🗺️ Directions: ${WEDDING_DATA.venueMapUrl}\n⏰ Time: ${WEDDING_DATA.weddingTimeDisplay}\n\n💌 Digital Invitation: https://snehith-weds-krishnapriya.online`,
       });
-
-      // Parse subtitle lines: line 0 = venue, line 1 = time
-      const subtitleLines = (event.subtitle || "").split("\n");
-      const venueLine = subtitleLines[0] || "";
-      const timeLine  = subtitleLines[1] || "";
 
       eventsHtml += `
             <section class="section-animate w-full flex flex-col items-center justify-center py-12 px-5 bg-wedding-bg relative overflow-hidden">

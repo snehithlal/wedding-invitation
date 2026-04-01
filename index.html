@@ -12,7 +12,7 @@
   <meta property="og:url" content="https://snehith-weds-krishnapriya.online/">
   <meta property="og:title" content="Snehith & Krishnapriya | Wedding Invitation 💜">
   <meta property="og:description" content="Tap to open our digital invitation! We can't wait to celebrate with you on Sunday, 10th May 2026.">
-  <meta property="og:image" content="https://snehith-weds-krishnapriya.online/images/og-preview-v2.png">
+  <meta property="og:image" content="https://snehith-weds-krishnapriya.online/images/og-preview.png">
   <meta property="twitter:card" content="summary_large_image">
   
   <!-- Fonts (2 Max for Premium Typography) -->
@@ -339,30 +339,63 @@
     }
     .wax-seal-wrap:hover  { transform: translate(-50%,-50%) scale(1.07); }
     .wax-seal-wrap:active { transform: translate(-50%,-50%) scale(0.96); }
-    .wax-seal { position: relative; width: 104px; height: 104px; margin-top: -6px; }
+    .wax-seal { position: relative; width: 118px; height: 118px; margin-top: -6px; }
 
     .seal-ring-text {
-        position: absolute; inset: 0;
+        position: absolute; inset: -1px;
         animation: sealSpin 12s linear infinite;
     }
     @keyframes sealSpin { to { transform: rotate(360deg); } }
 
-    /* Wax seal pulse animation */
-    .pulse-ring {
+    /* Wax seal — breathing golden aura */
+    .seal-aura {
         position: absolute; inset: -18px;
         border-radius: 50%;
-        background: rgba(212,175,55,0.45);
+        background: radial-gradient(circle, rgba(212,175,55,0.32) 0%, rgba(212,175,55,0) 68%);
         z-index: -1;
-        animation: pulseAnimate 2s infinite ease-out;
+        animation: sealBreathe 2.6s ease-in-out infinite;
         pointer-events: none;
     }
-    @keyframes pulseAnimate {
-        0% { transform: scale(0.8); opacity: 1; }
-        100% { transform: scale(1.4); opacity: 0; }
+    @keyframes sealBreathe {
+        0%, 100% { transform: scale(0.88); opacity: 0.4; }
+        50%      { transform: scale(1.2); opacity: 0.9; }
+    }
+
+    /* Outer soft pulse ring — subtle "tap me" cue */
+    .seal-pulse-ring {
+        position: absolute; inset: -6px;
+        border-radius: 50%;
+        border: 1.5px solid rgba(212,175,55,0.35);
+        z-index: -1; pointer-events: none;
+        animation: pulseRingExpand 2.6s ease-out infinite;
+    }
+    @keyframes pulseRingExpand {
+        0%   { transform: scale(0.95); opacity: 0.6; }
+        70%  { transform: scale(1.45); opacity: 0; }
+        100% { transform: scale(1.45); opacity: 0; }
+    }
+
+    /* Shimmer sweep over gold circle */
+    .seal-shimmer {
+        position: absolute; inset: 20px; border-radius: 50%;
+        overflow: hidden; z-index: 3; pointer-events: none;
+    }
+    .seal-shimmer::after {
+        content: '';
+        position: absolute; top: -50%; left: -60%; width: 40%; height: 200%;
+        background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.55) 48%, rgba(255,255,255,0.25) 52%, transparent 70%);
+        transform: rotate(25deg);
+        animation: shimmerSweep 3.5s ease-in-out infinite;
+    }
+    @keyframes shimmerSweep {
+        0%, 100% { left: -60%; opacity: 0; }
+        10%      { opacity: 1; }
+        50%      { left: 120%; opacity: 1; }
+        60%, 100% { left: 120%; opacity: 0; }
     }
 
     .seal-gold-circle {
-        position: absolute; inset: 18px; border-radius: 50%;
+        position: absolute; inset: 20px; border-radius: 50%;
         background: radial-gradient(circle at 36% 36%, #f5e070 0%, #D4AF37 42%, #a8870d 100%);
         box-shadow:
             0 3px 12px rgba(0,0,0,0.38),
@@ -371,11 +404,12 @@
             inset 0 -1px 2px rgba(0,0,0,0.28);
     }
     .seal-monogram {
-        position: absolute; inset: 18px; border-radius: 50%;
-        display: flex; align-items: center; justify-content: center;
-        font-family: 'Great Vibes', cursive; font-size: 22px;
+        position: absolute;
+        top: 50%; left: 47%;
+        transform: translate(-50%, -50%);
+        font-family: 'Great Vibes', cursive; font-size: 17px;
         color: #3a0e6e; text-shadow: 0 1px 2px rgba(255,255,255,0.5);
-        z-index: 2;
+        z-index: 2; white-space: nowrap; pointer-events: none;
     }
     /* seal disappears on open */
     .envelope-wrap.is-open .wax-seal-wrap {
@@ -383,25 +417,37 @@
         transition: opacity .4s ease, transform .4s ease;
     }
 
-    /* Tap Prompt */
+    /* Tap Prompt — minimal premium */
     .env-tap-prompt {
         display: flex; flex-direction: column; align-items: center; justify-content: center;
-        margin-top: 30px; gap: 8px;
+        margin-top: 28px; gap: 8px;
         animation: fadeUp 1s ease 1.2s both;
-        pointer-events: none;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
     }
-    .env-tap-prompt svg {
-        width: 18px; height: 18px; color: #D4AF37;
-        animation: subtleBounce 2s infinite ease-in-out;
+    .env-tap-prompt .tap-line {
+        display: flex; align-items: center; gap: 14px;
     }
-    .env-tap-prompt span {
+    .env-tap-prompt .tap-dash {
+        width: 32px; height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(212,175,55,0.55), transparent);
+    }
+    .env-tap-prompt .tap-text {
         font-family: 'Montserrat', sans-serif;
-        font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
-        color: #5B2D8E; font-weight: 600; opacity: 0.85;
+        font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase;
+        font-weight: 600;
+        color: rgba(91,45,142,0.55);
     }
-    @keyframes subtleBounce {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-5px); }
+    .env-tap-prompt .tap-arrow-wrap {
+        color: rgba(212,175,55,0.7);
+        animation: arrowBounce 2s ease-in-out infinite;
+    }
+    .env-tap-prompt .tap-arrow {
+        display: block;
+    }
+    @keyframes arrowBounce {
+        0%, 100% { transform: translateY(0); opacity: 0.5; }
+        50%      { transform: translateY(5px); opacity: 1; }
     }
 
     /* ═══ Invitation Reveal ═══ */
@@ -617,18 +663,37 @@
           <!-- Wax Seal -->
           <div class="wax-seal-wrap" id="wax-seal">
             <div class="wax-seal">
-              <svg class="seal-ring-text" viewBox="0 0 104 104">
+              <div class="seal-aura"></div>
+              <div class="seal-pulse-ring"></div>
+              <svg class="seal-ring-text" viewBox="0 0 120 120">
                 <defs>
-                  <path id="sealCircle" d="M 52,52 m -46,0 a 46,46 0 1,1 92,0 a 46,46 0 1,1 -92,0"/>
+                  <path id="sealCircle" d="M 60,60 m -52,0 a 52,52 0 1,1 104,0 a 52,52 0 1,1 -104,0"/>
                 </defs>
                 <text font-family="Montserrat, sans-serif" font-size="6.2" font-weight="600" letter-spacing="1.8" fill="#D4AF37" opacity="0.95">
-                  <textPath href="#sealCircle" startOffset="0%" textLength="289" lengthAdjust="spacingAndGlyphs">TAP TO VIEW INVITATION ✧ TAP TO VIEW INVITATION ✧ </textPath>
+                  <textPath href="#sealCircle" startOffset="0%" textLength="326" lengthAdjust="spacingAndGlyphs">TAP TO VIEW INVITATION ✧ TAP TO VIEW INVITATION ✧ </textPath>
                 </text>
               </svg>
               <div class="seal-gold-circle"></div>
-              <div class="seal-monogram">S&amp;K</div>
+              <div class="seal-shimmer"></div>
+              <div class="seal-monogram">S &amp; K</div>
             </div>
           </div>
+
+        </div>
+      </div>
+
+      <!-- Tap Prompt -->
+      <div class="env-tap-prompt" onclick="openEnvelope()">
+        <div class="tap-line">
+          <span class="tap-dash"></span>
+          <span class="tap-text">Open Invitation</span>
+          <span class="tap-dash"></span>
+        </div>
+        <div class="tap-arrow-wrap">
+          <svg class="tap-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M9 3 L9 14" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+            <path d="M5 10.5 L9 14.5 L13 10.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </div>
       </div>
 
