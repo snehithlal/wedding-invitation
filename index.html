@@ -444,6 +444,11 @@
         font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase;
         font-weight: 600;
         color: rgba(91,45,142,0.55);
+        animation: tapTextPulse 2.4s ease-in-out infinite;
+    }
+    @keyframes tapTextPulse {
+        0%, 100% { color: rgba(91,45,142,0.55); }
+        50%      { color: rgba(91,45,142,0.88); }
     }
     .env-tap-prompt .tap-arrow-wrap {
         color: rgba(212,175,55,0.7);
@@ -457,13 +462,120 @@
         50%      { transform: translateY(5px); opacity: 1; }
     }
 
+    /* ═══ Envelope attention — nudge (delayed via JS) ═══ */
+    .envelope-nudge {
+        animation: envelopeNudge 2.8s ease-in-out infinite;
+    }
+    @keyframes envelopeNudge {
+        0%, 100% { transform: translateY(0) scale(1); }
+        20%      { transform: translateY(-6px) scale(1.02); }
+        40%      { transform: translateY(2px) scale(0.99); }
+        60%      { transform: translateY(-3px) scale(1.01); }
+        80%      { transform: translateY(0) scale(1); }
+    }
+
+    /* ═══ Wax seal — amplified glow after delay ═══ */
+    .seal-attention .seal-aura {
+        animation: sealAttentionGlow 2s ease-in-out infinite !important;
+    }
+    .seal-attention .seal-pulse-ring {
+        animation: sealAttentionRing 2s ease-out infinite !important;
+    }
+    @keyframes sealAttentionGlow {
+        0%, 100% { transform: scale(0.9); opacity: 0.35; }
+        50%      { transform: scale(1.5); opacity: 1; }
+    }
+    @keyframes sealAttentionRing {
+        0%   { transform: scale(0.9); opacity: 0.8; }
+        70%  { transform: scale(1.7); opacity: 0; }
+        100% { transform: scale(1.7); opacity: 0; }
+    }
+
+    /* ═══ Scroll-to-explore indicator (inner page) ═══ */
+    .scroll-indicator {
+        position: absolute;
+        bottom: 24px; left: 50%;
+        transform: translateX(-50%);
+        display: flex; flex-direction: column;
+        align-items: center; gap: 6px;
+        z-index: 20;
+        opacity: 0;
+        animation: scrollIndicatorIn 0.8s ease 1.8s forwards;
+        transition: opacity 0.5s ease;
+        pointer-events: none;
+    }
+    .scroll-indicator.fade-out {
+        opacity: 0 !important;
+        animation: none;
+    }
+    .scroll-indicator .scroll-text {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 8px; letter-spacing: 0.35em;
+        text-transform: uppercase; font-weight: 600;
+        color: rgba(91,45,142,0.5);
+    }
+    .scroll-indicator .scroll-chevrons {
+        display: flex; flex-direction: column;
+        align-items: center; gap: 0;
+        animation: scrollChevronBounce 2s ease-in-out infinite;
+    }
+    .scroll-indicator .scroll-chevrons svg {
+        color: rgba(212,175,55,0.6);
+    }
+    .scroll-indicator .scroll-chevrons svg:nth-child(2) {
+        margin-top: -6px;
+        opacity: 0.4;
+    }
+    @keyframes scrollIndicatorIn {
+        0%   { opacity: 0; transform: translateX(-50%) translateY(10px); }
+        100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+    @keyframes scrollChevronBounce {
+        0%, 100% { transform: translateY(0); }
+        50%      { transform: translateY(6px); }
+    }
+
+    /* ═══ Scroll track (subtle side line) ═══ */
+    .scroll-track {
+        position: fixed; right: calc(50% - 240px + 8px);
+        top: 50%; transform: translateY(-50%);
+        width: 3px; height: 50px;
+        background: rgba(91,45,142,0.08);
+        border-radius: 3px;
+        z-index: 60;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        pointer-events: none;
+    }
+    .scroll-track.visible { opacity: 1; }
+    .scroll-track .scroll-thumb {
+        width: 100%; height: 16px;
+        background: rgba(212,175,55,0.45);
+        border-radius: 3px;
+        transition: top 0.15s ease;
+        position: absolute; top: 0;
+    }
+    @media (max-width: 480px) {
+        .scroll-track { right: 6px; }
+    }
+
     /* ═══ Invitation Reveal ═══ */
     #invitation-reveal {
         position: absolute; top: 0; inset: 0;
         overflow-y: auto; opacity: 0; pointer-events: none;
         transition: opacity .8s ease .5s; z-index: 50;
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+        overscroll-behavior-y: contain;
+        will-change: scroll-position;
+        transform: translateZ(0);
     }
     #invitation-reveal.visible { opacity: 1; pointer-events: auto; }
+    #invitation-reveal * {
+        /* GPU-accelerate all inner content for buttery smooth scroll */
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
 
     /* ═══ Petal burst ═══ */
     .petal {
@@ -658,7 +770,7 @@
       </div>
 
       <!-- The Envelope -->
-      <div class="envelope-wrap" id="envelope" onclick="openEnvelope()">
+      <div class="envelope-wrap envelope-nudge" id="envelope" onclick="openEnvelope()">
         <div class="envelope-body">
           <div class="envelope-inner"></div>
           <div class="envelope-left"></div>
@@ -719,10 +831,32 @@
   <script src="data.js"></script>
   <script src="script.js"></script>
 
+  <!-- Scroll indicator (injected into inner page after open) -->
+  <div class="scroll-track" id="scroll-track">
+    <div class="scroll-thumb" id="scroll-thumb"></div>
+  </div>
+
   <script>
+    // Seal glow starts after a brief delay for impact
+    (function initAttention() {
+      const seal = document.getElementById('wax-seal');
+      setTimeout(() => {
+        const env = document.getElementById('envelope');
+        if (env && !env.classList.contains('is-open') && seal) {
+          seal.classList.add('seal-attention');
+        }
+      }, 2000);
+    })();
+
     function openEnvelope() {
       const env = document.getElementById('envelope');
       if (env.classList.contains('is-open')) return;
+
+      // Stop attention animations
+      env.classList.remove('envelope-nudge');
+      const seal = document.getElementById('wax-seal');
+      if (seal) seal.classList.remove('seal-attention');
+
       env.classList.add('is-open');
       burstPetals();
       setTimeout(() => {
@@ -732,8 +866,76 @@
         setTimeout(() => {
           cover.classList.add('hidden');
           reveal.style.overflowY = 'auto';
+          // Show scroll indicator after content is visible
+          showScrollIndicator();
         }, 900);
       }, 700);
+    }
+
+    function showScrollIndicator() {
+      const reveal = document.getElementById('invitation-reveal');
+      if (!reveal) return;
+
+      // Inject scroll indicator into the first section (hero)
+      const heroSection = reveal.querySelector('section');
+      if (heroSection && !heroSection.querySelector('.scroll-indicator')) {
+        heroSection.style.position = 'relative';
+        const indicator = document.createElement('div');
+        indicator.className = 'scroll-indicator';
+        indicator.id = 'scroll-hint';
+        indicator.innerHTML = `
+          <span class="scroll-text">Scroll to explore</span>
+          <div class="scroll-chevrons">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4 6.5 L9 11.5 L14 6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4 6.5 L9 11.5 L14 6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        `;
+        heroSection.appendChild(indicator);
+      }
+
+      // Show the scroll track
+      const scrollTrack = document.getElementById('scroll-track');
+      setTimeout(() => {
+        if (scrollTrack) scrollTrack.classList.add('visible');
+      }, 2000);
+
+      // Fade out scroll indicator on scroll
+      let hasScrolled = false;
+      reveal.addEventListener('scroll', function onScroll() {
+        if (!hasScrolled) {
+          hasScrolled = true;
+          const hint = document.getElementById('scroll-hint');
+          if (hint) hint.classList.add('fade-out');
+          // Remove hint after animation
+          setTimeout(() => { if (hint) hint.remove(); }, 600);
+        }
+
+        // Update scroll track thumb position
+        const scrollTop = reveal.scrollTop;
+        const scrollHeight = reveal.scrollHeight - reveal.clientHeight;
+        const scrollPercent = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
+        const thumb = document.getElementById('scroll-thumb');
+        const track = document.getElementById('scroll-track');
+        if (thumb && track) {
+          const trackHeight = track.clientHeight;
+          const thumbHeight = 16;
+          const maxTop = trackHeight - thumbHeight;
+          thumb.style.top = (scrollPercent * maxTop) + 'px';
+        }
+
+        // Show/hide scroll track based on activity
+        if (scrollTrack) {
+          scrollTrack.classList.add('visible');
+          clearTimeout(scrollTrack._hideTimeout);
+          scrollTrack._hideTimeout = setTimeout(() => {
+            scrollTrack.classList.remove('visible');
+          }, 1500);
+        }
+      });
     }
 
     function burstPetals() {
