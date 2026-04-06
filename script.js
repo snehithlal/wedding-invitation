@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
                           }),
                         )}" target="_blank"
                            class="px-5 py-3 rounded-full text-white font-semibold shadow-lg shadow-black/10 active:scale-[0.98] transition text-[14px]" style="background:#5B2D8E;">
-                           Save Google Calendar
+                           Add to Google Calendar
                         </a>
                     </div>
                 </div>
@@ -135,9 +135,9 @@ document.addEventListener("DOMContentLoaded", () => {
         <section id="big-day" class="section-animate min-h-[92vh] flex flex-col items-center justify-center py-14 sm:py-16 px-4 sm:px-6 bg-wedding-bg relative overflow-hidden">
             <div class="relative z-10 text-center reveal" data-reveal style="transition-delay: 0ms;">
                 <div class="text-[11px] tracking-[0.32em] uppercase text-gray-600/80 font-semibold mb-3">
-                    The big day
+                    The Big Day
                 </div>
-                <h2 class="font-script text-4xl sm:text-5xl text-wedding-red mb-2">Count Down</h2>
+                <h2 class="font-script text-4xl sm:text-5xl text-wedding-red mb-2">Countdown</h2>
                 <p class="text-gray-600 max-w-[320px] mx-auto">
                     We can't wait to celebrate with you.
                 </p>
@@ -208,7 +208,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     With immense joy
                 </div>
                 <h2 class="font-serif font-bold text-3xl text-wedding-red tracking-widest uppercase">
-                    We are inviting you
+                    We invite you
                 </h2>
             </div>
 
