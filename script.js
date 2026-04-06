@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
 
                 <div class="fade-up d2 arch-image-wrapper mx-auto mb-6 shadow-lg lift">
-                    <img src="${WEDDING_DATA.couplePhoto}" class="arch-image" alt="Couple Photo" onerror="this.src='https://images.unsplash.com/photo-1583939003579-730e3918a45a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
+                    <img src="${WEDDING_DATA.couplePhoto}" class="arch-image" alt="Couple Photo" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1583939003579-730e3918a45a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
                 </div>
 
                 <div class="text-center w-full flex flex-col items-center">
@@ -177,7 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="rotated-border-1"></div>
                 <div class="rotated-border-2"></div>
                 <div class="photo-inner bg-white shadow-xl">
-                    <img src="${person.photo}" alt="${person.name}" onerror="this.src='https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
+                    <img src="${person.photo}" alt="${person.name}" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
                 </div>
             </div>
 
@@ -374,8 +374,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   app.innerHTML = `
         ${renderHero()}
-        ${renderCountdown()}
         ${renderCouple()}
+        ${renderCountdown()}
         ${renderEvents()}
     `;
 
