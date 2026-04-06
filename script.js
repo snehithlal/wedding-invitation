@@ -325,8 +325,49 @@ document.addEventListener("DOMContentLoaded", () => {
     return eventsHtml;
   };
 
-  // 5. Gallery Section — hidden temporarily (no photos yet)
-  // const renderGallery = () => { ... };
+  // 5. Gallery Section — "Coming Soon" teaser
+  const renderGallery = () => `
+        <section id="gallery" class="section-animate w-full flex flex-col items-center justify-center py-16 px-5 relative overflow-hidden">
+            <div class="text-center mb-8 z-10 reveal" data-reveal>
+                <div class="text-[11px] tracking-[0.32em] uppercase text-gray-600/80 font-semibold mb-3">
+                    Memories
+                </div>
+                <h2 class="font-script text-4xl sm:text-5xl text-wedding-red mb-3">Gallery</h2>
+                <p class="text-gray-500 text-[13px] max-w-[280px] mx-auto leading-relaxed">
+                    Our beautiful moments together — stay tuned!
+                </p>
+            </div>
+
+            <!-- Frosted placeholder grid -->
+            <div class="reveal grid grid-cols-3 gap-3 w-full max-w-[340px] z-10 mb-8" data-reveal>
+                ${[1,2,3,4,5,6].map((i) => `
+                <div class="aspect-square rounded-2xl backdrop-blur-sm border border-[rgba(91,45,142,0.10)] overflow-hidden relative" style="background: linear-gradient(135deg, rgba(248,245,255,0.9) 0%, rgba(216,200,240,0.4) 100%);">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(91,45,142,0.18)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="18" height="18" rx="3" ry="3"/>
+                            <circle cx="8.5" cy="8.5" r="1.5"/>
+                            <polyline points="21 15 16 10 5 21"/>
+                        </svg>
+                    </div>
+                </div>
+                `).join('')}
+            </div>
+
+            <!-- Camera icon + Coming Soon badge -->
+            <div class="reveal flex flex-col items-center gap-4 z-10" data-reveal>
+                <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, rgba(91,45,142,0.08) 0%, rgba(212,175,55,0.08) 100%); border: 1px solid rgba(91,45,142,0.12);">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5B2D8E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.6">
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                        <circle cx="12" cy="13" r="4"/>
+                    </svg>
+                </div>
+                <span class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[9px] tracking-[0.3em] uppercase font-semibold" style="background: linear-gradient(135deg, rgba(248,245,255,0.95) 0%, rgba(216,200,240,0.5) 100%); color: rgba(91,45,142,0.55); border: 1px solid rgba(91,45,142,0.10); box-shadow: 0 2px 12px rgba(91,45,142,0.06);">
+                    <span style="display:inline-block; width:5px; height:5px; border-radius:50%; background:#D4AF37; opacity:0.7;"></span>
+                    Coming Soon
+                </span>
+            </div>
+        </section>
+    `;
 
   // ── Render the entire app ─────────────────────────────────────────────
   app.classList.add("pb-10");
