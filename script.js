@@ -1,5 +1,14 @@
 // script.js
 
+// Asynchronously preload the cover image during early page load
+if (typeof WEDDING_DATA !== "undefined" && WEDDING_DATA.couplePhoto) {
+  const preloadImg = document.createElement("link");
+  preloadImg.rel = "preload";
+  preloadImg.as = "image";
+  preloadImg.href = WEDDING_DATA.couplePhoto;
+  document.head.appendChild(preloadImg);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const app = document.getElementById("app-inner");
 
@@ -93,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
 
                 <div class="fade-up d2 arch-image-wrapper mx-auto mb-6 shadow-lg lift">
-                    <img src="${WEDDING_DATA.couplePhoto}" class="arch-image" alt="Couple Photo" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1583939003579-730e3918a45a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
+                    <img src="${WEDDING_DATA.couplePhoto}" class="arch-image" alt="" decoding="async">
                 </div>
 
                 <div class="text-center w-full flex flex-col items-center">
